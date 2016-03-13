@@ -31,11 +31,11 @@ public final class Constants{
         {"IX86/DSHR/", "Diablo_s.exe",        "Storm.dll",    "Battle.snp",   "DSHR.bin"},
         {"IX86/SSHR/", "Starcraft_s.exe",     "Storm.dll",    "Battle.snp",   "SSHR.bin"}
     };
-    public static int[] IX86verbytes = {0xD1, 0xD1, 0x4f, 0x0b, 0x0b, 0xa9, 0x15, 0x15, 0x2a, 0x2a, 0xa5};    
+    public static int[] IX86verbytes = {0xD1, 0xD1, 0x4f, 0x0e, 0x0e, 0xa9, 0x15, 0x15, 0x2a, 0x2a, 0xa5};    
     
     public static String ArchivePath = "DLLs/";
     
-	public static String build="Build V3.1 Bug Fixes, SQL Stats tracking. (10-14-07)";
+    public static String build="Build V3.1 Bug Fixes, SQL Stats tracking. (10-14-07)";
     //public static String build="Build V3.0 BotNet Admin, Lockdown, Legacy Clients.(07-07-07)";
     //public static String build="Build V2.9 Remote admin, extended admin commands w/ JSTR support.(01/18/06)";
     public static int maxThreads=500;
@@ -53,17 +53,17 @@ public final class Constants{
     public static String   BotNetPassword = "";
     public static String   BotNetServer   = "www.valhallalegends.com";
 	
-	public static boolean LogStats         = false;
-	public static String  StatsUsername    = "";
-	public static String  StatsPassword    = "";
-	public static String  StatsDatabase    = "";
-	public static String  StatsServer      = "localhost";
-	public static int     StatsQueue       = 10;
-	public static boolean StatsLogIps      = false;
-	public static boolean StatsLogCRevs    = true;
-	public static boolean StatsLogBotIDs   = true;
-	public static boolean StatsLogConns    = true;
-	public static boolean StatsCheckSchema = true;
+    public static boolean LogStats         = false;
+    public static String  StatsUsername    = "";
+    public static String  StatsPassword    = "";
+    public static String  StatsDatabase    = "";
+    public static String  StatsServer      = "localhost";
+    public static int     StatsQueue       = 10;
+    public static boolean StatsLogIps      = false;
+    public static boolean StatsLogCRevs    = true;
+    public static boolean StatsLogBotIDs   = true;
+    public static boolean StatsLogConns    = true;
+    public static boolean StatsCheckSchema = true;
     
     public static String DownloadPath = "./";
     
