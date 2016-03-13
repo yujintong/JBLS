@@ -296,6 +296,9 @@ public class CheckRevisionV1
           ret[0] = Constants.IX86files[prod-1][0] + Constants.IX86files[prod-1][1];
           ret[1] = Constants.IX86files[prod-1][0] + Constants.IX86files[prod-1][2];
           ret[2] = Constants.IX86files[prod-1][0] + Constants.IX86files[prod-1][3];          
+          
+          // hotfix for D2 update on 3/10/2016
+          if (prod == Constants.PRODUCT_DIABLO2 || prod == Constants.PRODUCT_LORDOFDESTRUCTION) ret = new String[] { ret[0] };
           break;
       /*case PLATFORM_POWERPC:
           break;
