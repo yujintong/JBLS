@@ -31,7 +31,7 @@ public final class Constants{
         {"IX86/DSHR/", "Diablo_s.exe",        "Storm.dll",    "Battle.snp",   "DSHR.bin"},
         {"IX86/SSHR/", "Starcraft_s.exe",     "Storm.dll",    "Battle.snp",   "SSHR.bin"}
     };
-    public static int[] IX86verbytes = {0xD1, 0xD1, 0x4f, 0x0e, 0x0e, 0xa9, 0x15, 0x15, 0x2a, 0x2a, 0xa5};    
+    public static int[] IX86verbytes = {0xD3, 0xD3, 0x4f, 0x0e, 0x0e, 0xa9, 0x1A, 0x1A, 0x2a, 0x2a, 0xa5};    
     
     public static String ArchivePath = "DLLs/";
     
