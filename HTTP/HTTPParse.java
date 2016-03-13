@@ -140,15 +140,15 @@ public class HTTPParse extends Thread{
        	  page = page.replaceAll("<drtl>", String.valueOf(HashMain.CRevChecks[8]));
        	  page = page.replaceAll("<dshr>", String.valueOf(HashMain.CRevChecks[9]));
        	  page = page.replaceAll("<sshr>", String.valueOf(HashMain.CRevChecks[10]));
-/*       	  page = page.replaceAll("<starvb>", hex(Constants.verbyteSTAR));
-       	  page = page.replaceAll("<w2bnvb>", hex(Constants.verbyteWAR2));
-       	  page = page.replaceAll("<d2dvvb>", hex(Constants.verbyteD2DV));
-       	  page = page.replaceAll("<d2xpvb>", hex(Constants.verbyteD2XP));
-       	  page = page.replaceAll("<jstrvb>", hex(Constants.verbyteJSTR));
-       	  page = page.replaceAll("<war3vb>", hex(Constants.verbyteWAR3));
-       	  page = page.replaceAll("<drtlvb>", hex(Constants.verbyteDRTL));
-       	  page = page.replaceAll("<dshrvb>", hex(Constants.verbyteDSHR));
-       	  page = page.replaceAll("<sshrvb>", hex(Constants.verbyteSSHR));*/
+       	  page = page.replaceAll("<starvb>", hex(Constants.IX86verbytes[Constants.PRODUCT_STARCRAFT - 1]));
+       	  page = page.replaceAll("<w2bnvb>", hex(Constants.IX86verbytes[Constants.PRODUCT_WAR2BNE - 1]));
+       	  page = page.replaceAll("<d2dvvb>", hex(Constants.IX86verbytes[Constants.PRODUCT_DIABLO2 - 1]));
+       	  page = page.replaceAll("<d2xpvb>", hex(Constants.IX86verbytes[Constants.PRODUCT_LORDOFDESTRUCTION - 1]));
+       	  page = page.replaceAll("<jstrvb>", hex(Constants.IX86verbytes[Constants.PRODUCT_JAPANSTARCRAFT - 1]));
+       	  page = page.replaceAll("<war3vb>", hex(Constants.IX86verbytes[Constants.PRODUCT_WARCRAFT3 - 1]));
+       	  page = page.replaceAll("<drtlvb>", hex(Constants.IX86verbytes[Constants.PRODUCT_DIABLO - 1]));
+       	  page = page.replaceAll("<dshrvb>", hex(Constants.IX86verbytes[Constants.PRODUCT_DIABLOSHAREWARE - 1]));
+       	  page = page.replaceAll("<sshrvb>", hex(Constants.IX86verbytes[Constants.PRODUCT_STARCRAFTSHAREWARE - 1]));
        	  page = page.replaceAll("<auth>", String.valueOf(Constants.requireAuthorization));
        	  page = page.replaceAll("<build>", Constants.build);
        	  page = page.replaceAll("<news>", Constants.strNews[0]+"<br \\>"+Constants.strNews[1]+"<br \\>"+Constants.strNews[2]+"<br \\>"+Constants.strNews[3]+"<br \\>"+Constants.strNews[4]);
@@ -305,8 +305,10 @@ public class HTTPParse extends Thread{
     writeBytes(HTTPServer.buildHeader(404, "text/html; charset=iso-8859-1", page.length()) + CRLF + page);
   }
 
-/*  private String hex(int value){
-    return Integer.toString((value & 0xF0) >> 4, 16) + "" +
-	       Integer.toString((value & 0x0F) >> 0, 16);
-  }*/
+  private String hex(int value){
+    String s = Integer.toHexString(value);
+    if (s.length() == 1)
+      s = "0" + s;
+    return s;
+  }
 }
