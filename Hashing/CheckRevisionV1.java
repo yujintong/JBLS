@@ -287,26 +287,26 @@ public class CheckRevisionV1
     
     
     public static String[] getFiles(int prod, byte plat){
-      String[] ret = {"", "", ""};
+      List<String> ret = new ArrayList<String>();
+      
       if(prod < 0) return null;
       if(prod > Constants.prods.length + 1) return null;
       
       switch(plat){
         case Constants.PLATFORM_INTEL:
-          ret[0] = Constants.IX86files[prod-1][0] + Constants.IX86files[prod-1][1];
-          ret[1] = Constants.IX86files[prod-1][0] + Constants.IX86files[prod-1][2];
-          ret[2] = Constants.IX86files[prod-1][0] + Constants.IX86files[prod-1][3];          
-          
-          // hotfix for D2 update on 3/10/2016
-          if (prod == Constants.PRODUCT_DIABLO2 || prod == Constants.PRODUCT_LORDOFDESTRUCTION) ret = new String[] { ret[0] };
+          String[] files = Constants.IX86files[prod - 1];
+          for (int i = 1; i < files.length - 1; i++) {
+            if (!files[i].equalsIgnoreCase("NULL") && files[i].length() > 0)
+          	  ret.add(files[0] + files[i]);
+            }
           break;
       /*case PLATFORM_POWERPC:
           break;
       case PLATFORM_MACOSX:
         break;*/
-        default: ret = null;
+        default: return null;
       }
-      return ret;
+      return ret.toArray(new String[0]);
     }
     
     
