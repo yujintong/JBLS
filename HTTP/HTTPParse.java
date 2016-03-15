@@ -30,6 +30,7 @@ public class HTTPParse extends Thread{
     ".indent {padding-left: 50pt;}" + CRLF +
     ".line {" + CRLF +
 	"  font-size: 12px;" + CRLF +
+	"  text-align: center;" + CRLF +
 	"  padding-top: 5px;" + CRLF +
 	"  padding-bottom: 5px;" + CRLF +
 	"  vertical-align: top;" + CRLF +
@@ -37,6 +38,7 @@ public class HTTPParse extends Thread{
     "}" + CRLF +
     ".li {" + CRLF +
 	"  font-size: 12px;" + CRLF +
+	"  text-align: center;" + CRLF +
 	"  padding-top: 3px;" + CRLF +
 	"  padding-bottom: 3px;" + CRLF +
 	"  border-bottom: 1px dotted #ffffff;" + CRLF +
@@ -64,9 +66,9 @@ public class HTTPParse extends Thread{
     "        <td align=left class=line width=100><strong># of Connections</strong></td>" + CRLF +
     "        <td align=left class=line width=100><strong>Version Byte</strong></td>" + CRLF +
     "      </tr>" + CRLF +
-    "      <tr><td class=li>STAR Keys</td><td class=li><sck></td><td class=li>&nbsp;</td></tr>" + CRLF +
-    "      <tr><td class=li>D2/WAR2 Keys</td><td class=li><d2k></td><td class=li>&nbsp;</td></tr>" + CRLF +
-    "      <tr><td class=li>WAR3 Keys</td><td class=li><w3k></td><td class=li>&nbsp;</td></tr>" + CRLF +
+    "      <tr><td class=li>STAR Keys</td><td class=li><sck></td><td class=li>-</td></tr>" + CRLF +
+    "      <tr><td class=li>D2/WAR2 Keys</td><td class=li><d2k></td><td class=li>-</td></tr>" + CRLF +
+    "      <tr><td class=li>WAR3 Keys</td><td class=li><w3k></td><td class=li>-</td></tr>" + CRLF +
     "      <tr><td class=li>STAR Checks</td><td class=li><star></td><td class=li><starvb></td></tr>" + CRLF +
     "      <tr><td class=li>W2BN Checks</td><td class=li><w2bn></td><td class=li><w2bnvb></td></tr>" + CRLF +
     "      <tr><td class=li>D2DV Checks</td><td class=li><d2dv></td><td class=li><d2dvvb></td></tr>" + CRLF +
@@ -127,6 +129,7 @@ public class HTTPParse extends Thread{
 		  }
        	  page = page.replaceAll("<count>", String.valueOf(X));
        	  page = page.replaceAll("<jbls>", ""+BNLSConnectionThread.connectionCount);
+       	  page = page.replaceAll("<admin>", "n/a");
        	  page = page.replaceAll("<sck>", ""+HashMain.STARKeysHashed);
        	  page = page.replaceAll("<d2k>", ""+HashMain.D2DVKeysHashed);
        	  page = page.replaceAll("<w3k>", ""+HashMain.WAR3KeysHashed);
@@ -309,6 +312,6 @@ public class HTTPParse extends Thread{
     String s = Integer.toHexString(value);
     if (s.length() == 1)
       s = "0" + s;
-    return s;
+    return "0x" + s.toUpperCase();
   }
 }
