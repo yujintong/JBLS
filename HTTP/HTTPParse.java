@@ -77,7 +77,7 @@ public class HTTPParse extends Thread{
     "      <tr><td class=li>W3XP Checks</td><td class=li><war3></td><td class=li><war3vb></td></tr>" + CRLF +
     "      <tr><td class=li>DRTL Checks</td><td class=li><drtl></td><td class=li><drtlvb></td></tr>" + CRLF +
     "    </table>" + CRLF +
-    "    <table width=550 align=center callpadding=3 cellspacing=0 border=0>" + CRLF +
+    "    <table width=550 align=center cellpadding=3 cellspacing=0 border=0>" + CRLF +
     "      <tr><td align=left colspan=2><span class=subheader>Additional Information</span></td></tr>" + CRLF +
     "      <tr><td>This server requires a valid account to use: <auth></td></tr>" + CRLF +
     "      <tr><td><build></td></tr>" + CRLF +
