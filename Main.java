@@ -52,7 +52,7 @@ public class Main {
     cSettings.SaveSettings();
     
     Out.setDefaultOutputStream();
-    Out.println("Main", "Java Battle.Net Login Sever - (JBLS)  http://www.JBLS.org/");
+    Out.println("Main", "Java Battle.Net Login Server - (JBLS)  http://www.JBLS.org/");
     Out.println("Main", "Build: " + Constants.build);
 
     Out.println("Main", "JBLS Started");
