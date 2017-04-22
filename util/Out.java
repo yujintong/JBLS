@@ -13,10 +13,14 @@ package util;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Out {
 
@@ -116,6 +120,8 @@ public class Out {
 		if (logFile == null || !filePath.equals(logFile)) {
 			logFile = filePath;
 			
+			purgeOldLogs();
+			
 			// Close the current file.
 			if (logWriter != null) logWriter.close();
 			
@@ -127,6 +133,29 @@ public class Out {
 				logWriter = new PrintWriter(new FileWriter(logFile, true), true);
 			} catch (IOException e) {
 				e.printStackTrace();
+			}
+		}
+	}
+	
+	private static void purgeOldLogs()
+	{
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = new Date();
+		Date fileDate;
+		
+		File logDir = new File(Constants.LogFilePath);
+		File[] logFiles = logDir.listFiles();
+		if (logFiles != null) {
+			for (File file : logFiles) {
+				String fileName = file.getName();
+				try {
+					fileDate = df.parse(fileName.substring(0, fileName.length()- 4));
+					
+					long diff = (today.getTime() - fileDate.getTime());
+					if ((diff / (1000 * 60 * 60 * 24)) > Constants.logKeepDuration)
+						file.delete();
+					
+				} catch (ParseException e) { }
 			}
 		}
 	}
@@ -185,5 +214,4 @@ public class Out {
         
         return s.toString();
 	}
-
 }

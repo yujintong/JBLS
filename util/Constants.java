@@ -49,6 +49,7 @@ public final class Constants{
     public static boolean displayParseInfo=false;
     public static boolean debugInfo=false;
     public static boolean enableLogging = false;
+    public static int logKeepDuration = 7;
 
     public static boolean RunAdmin = false;
     public static String   BotNetUsername = "";

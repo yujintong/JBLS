@@ -23,6 +23,7 @@ public class cSettings {
    	Constants.displayParseInfo = Boolean.valueOf(Ini.ReadIni(file, "Main", "DisplayParseInfo", Boolean.toString(Constants.displayParseInfo)));
    	Constants.debugInfo = Boolean.valueOf(Ini.ReadIni(file, "Main", "DisplayDebugInfo", Boolean.toString(Constants.debugInfo)));
    	Constants.enableLogging = Boolean.valueOf(Ini.ReadIni(file, "Main", "EnableLogging", Boolean.toString(Constants.enableLogging)));
+   	Constants.logKeepDuration = Integer.parseInt(Ini.ReadIni(file, "Main", "LogFileKeepDays", Integer.toString(Constants.logKeepDuration)));
     
    	Constants.RunAdmin = Boolean.valueOf(Ini.ReadIni(file, "Admin", "EnableAdmin", Boolean.toString(Constants.RunAdmin)));
    	Constants.BotNetUsername = Ini.ReadIni(file, "Admin", "BotNetUsername", "");
