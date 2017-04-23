@@ -401,19 +401,22 @@ public class CheckRevisionV3 extends CheckRevisionV1{
   }
   
   public static String[] getFiles(int prod, byte plat){
-    String[] ret = {"", "", "", "", ""};
+	List<String> ret = new ArrayList<String>();
+	
     if(prod < 0) return null;
     if(prod > Constants.prods.length + 1) return null;
+    
     switch(plat){
       case Constants.PLATFORM_INTEL:
-        ret[0] = Constants.IX86files[prod-1][0] + Constants.IX86files[prod-1][1];
-        ret[1] = Constants.IX86files[prod-1][0] + Constants.IX86files[prod-1][2];
-        ret[2] = Constants.IX86files[prod-1][0] + Constants.IX86files[prod-1][3]; 
-        ret[3] = Constants.IX86files[prod-1][0] + Constants.IX86files[prod-1][4]; //Screen dump
+    	String[] files = Constants.IX86files[prod - 1];
+    	for (int i = 1; i < files.length - 1; i++) {
+    		if (!files[i].equalsIgnoreCase("NULL") && files[i].length() > 0)
+    			ret.add(files[0] + files[i]);
+    	}
         break;
-      default: ret = null;
+      default: return null;
     }
-    return ret;
+    return ret.toArray(new String[0]);
   }
   private static char[] getCharArray(int array){ return getCharArray(new int[]{array}); }
   private static char[] getCharArray(int[] array){
