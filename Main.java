@@ -69,7 +69,9 @@ public class Main {
       Controller.hServer.start();
     }
     
-    if(Constants.RunAdmin && Constants.BotNetUsername.length() > 0 && Constants.BotNetPassword.length() > 0){
+    if(Constants.RunAdmin && Constants.BotNetServer.length() > 0 && 
+    		Constants.BotNetBotID.length() > 0 && Constants.BotNetHubPW.length() > 0 &&
+    		Constants.BotNetUsername.length() > 0 && Constants.BotNetPassword.length() > 0){
       BotNet bn = new BotNet();
       bn.start();
     }   

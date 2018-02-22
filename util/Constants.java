@@ -52,6 +52,9 @@ public final class Constants{
     public static int logKeepDuration = 7;
 
     public static boolean RunAdmin = false;
+    public static String   BotNetBotID    = "";
+    public static String   BotNetHubPW    = "";
+    public static String   BotNetDatabase = "";
     public static String   BotNetUsername = "";
     public static String   BotNetPassword = "";
     public static String   BotNetServer   = "www.valhallalegends.com";

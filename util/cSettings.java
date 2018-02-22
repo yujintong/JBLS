@@ -26,6 +26,9 @@ public class cSettings {
    	Constants.logKeepDuration = Integer.parseInt(Ini.ReadIni(file, "Main", "LogFileKeepDays", Integer.toString(Constants.logKeepDuration)));
     
    	Constants.RunAdmin = Boolean.valueOf(Ini.ReadIni(file, "Admin", "EnableAdmin", Boolean.toString(Constants.RunAdmin)));
+   	Constants.BotNetBotID = Ini.ReadIni(file,  "Admin",  "BotNetBotID", Constants.BotNetBotID);
+   	Constants.BotNetHubPW = Ini.ReadIni(file,  "Admin",  "BotNetHubPW", Constants.BotNetHubPW);
+   	Constants.BotNetDatabase = Ini.ReadIni(file, "Admin", "BotNetDatabase", Constants.BotNetDatabase);
    	Constants.BotNetUsername = Ini.ReadIni(file, "Admin", "BotNetUsername", "");
    	Constants.BotNetPassword = Ini.ReadIni(file, "Admin", "BotNetPassword", "");
     Constants.BotNetServer   = Ini.ReadIni(file, "Admin", "BotNetServer", Constants.BotNetServer);
