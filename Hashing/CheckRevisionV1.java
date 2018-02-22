@@ -321,7 +321,7 @@ public class CheckRevisionV1
        
        StringBuffer exeInfo = new StringBuffer();
        exeInfo.append(f.getName()).append(" ");
-       exeInfo.append(PadString.padNumber(c.get(Calendar.MONTH), 2)).append("/");
+       exeInfo.append(PadString.padNumber(c.get(Calendar.MONTH) + 1, 2)).append("/");
        exeInfo.append(PadString.padNumber(c.get(Calendar.DAY_OF_MONTH), 2)).append("/");
        exeInfo.append(PadString.padNumber((c.get(Calendar.YEAR) % 100), 2)).append(" ");
        exeInfo.append(PadString.padNumber(c.get(Calendar.HOUR_OF_DAY), 2)).append(":");
