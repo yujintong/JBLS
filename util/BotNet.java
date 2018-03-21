@@ -34,16 +34,38 @@ public class BotNet extends Thread{
   private static final byte PACKET_ACCOUNT          = 0x0D; 
   //private static final byte PACKET_CHATDROPOPTIONS  = 0x10;  
 
-  private String BotID = "RivalBot";
-  private String HubPW = "b8f9b319f223ddcc38";
   private Hashtable<Integer, String> names = new Hashtable<Integer, String>();
   private Hashtable<String, Integer> ids = new Hashtable<String, Integer>();
+  
+  private InputStream in = null;
   private OutputStream out = null;
-  public static void main(String[] args){}
-  public void run(){
-    try{
-      Socket bnsck = new Socket(Constants.BotNetServer, 0x5555);
-      InputStream in = bnsck.getInputStream();
+  private Socket bnsck = null;
+  
+  public static void main(String[] args) { }
+  
+  public void run() {
+    try {
+      bnsck = new Socket();
+      SocketAddress sa = new InetSocketAddress(Constants.BotNetServer, 0x5555);
+      
+      // Try to connect every 10 seconds until successful.
+      while (!bnsck.isConnected()) {
+    	  try {
+    		  bnsck.connect(sa);
+    		  Out.info("BotNet", "Connected to BotNet!");
+    	  } catch (IOException ioEx) {
+    		  // Wait a few seconds and try again
+    		  try {
+    			  Thread.sleep(1000 * 10);
+    		  } catch (InterruptedException iEx) {
+    			  Out.info("BotNet", "BotNet thread interrupted.");
+    			  return;
+    		  }
+    		  bnsck = new Socket();	// reset the socket
+    	  }
+      }
+      
+      in = bnsck.getInputStream();
       out = bnsck.getOutputStream();
       
       OutPacketBuffer output = new OutPacketBuffer(PACKET_LOGON);
@@ -60,8 +82,11 @@ public class BotNet extends Thread{
           in.close();
           out.close();
           bnsck.close();
-          return;
+          
+          // Start over.
+          run();
         }
+        
         int i = 0;
         int read = 4;
         Buffer pData = new Buffer();
@@ -72,16 +97,30 @@ public class BotNet extends Thread{
             in.close();
             out.close();
             bnsck.close();
-            return;
+            
+            // Start over.
+            run();
           }
+          
           read++;
           pData.addByte((byte)i);
         }
         parse(pData, out, id);
       }
-    }catch(Exception e){
-      Out.error("BotNet", "Could not connect to BotNet: " + e.toString());
+    } catch (SocketException sockEx) {
+    	Out.error("BotNet", sockEx.getMessage());
+    	run();
+    } catch (Exception e) {
+      Out.error("BotNet", "BotNet error: " + e.toString());
     }  
+    
+    try {
+    	in.close();
+    	out.close();
+    	bnsck.close();
+    } catch (IOException ioEx) {
+    	// Ignore since we're stopping.
+    }
   }
   private void send(OutPacketBuffer data, OutputStream out){
     try{
