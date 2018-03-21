@@ -210,6 +210,16 @@ public class HTTPParse extends Thread{
           }catch(FileNotFoundException e){
             send404(file);
           }
+        }else if(file.startsWith("/bsha/")) {
+        	String input = file.substring(6);
+        	
+        	int[] hash = Hashing.BrokenSHA1.calcHashBuffer(input.getBytes());
+        	writeBytes(HTTPServer.buildHeader(200, "text/plain", 40) + CRLF + 
+        		  util.PadString.padHex(hash[0], 8) + 
+  		          util.PadString.padHex(hash[1], 8) + 
+  		          util.PadString.padHex(hash[2], 8) + 
+  		          util.PadString.padHex(hash[3], 8) +
+  		          util.PadString.padHex(hash[4], 8));
 
         }/*else if(file.equalsIgnoreCase("/WAR3.zip"))
           sendHashFile("WAR3", Constants.WAR3files);
