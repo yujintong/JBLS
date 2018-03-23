@@ -32,6 +32,8 @@ public class cSettings {
    	Constants.BotNetUsername = Ini.ReadIni(file, "Admin", "BotNetUsername", "");
    	Constants.BotNetPassword = Ini.ReadIni(file, "Admin", "BotNetPassword", "");
     Constants.BotNetServer   = Ini.ReadIni(file, "Admin", "BotNetServer", Constants.BotNetServer);
+    Constants.BotNetNotify   = Ini.ReadIni(file, "Admin", "BotNetNotifyUser", Constants.BotNetNotify);
+    Constants.BotNetNotifyCount = Integer.valueOf(Ini.ReadIni(file, "Admin", "BotNetNotifyCount", Integer.toString(Constants.BotNetNotifyCount)));
    	
 
    	Constants.LogStats = Boolean.valueOf(Ini.ReadIni(file, "Statistics", "Enable", Boolean.toString(Constants.LogStats)));

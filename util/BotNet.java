@@ -410,4 +410,9 @@ public class BotNet extends Thread{
     buff.addNTString(message);
     send(buff, out);
   }
+  
+  public void whisper(String name, String message) {
+	  if (ids.get(name) != null)
+		  whisper(ids.get(name), message);
+  }
 }

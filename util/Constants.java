@@ -58,6 +58,8 @@ public final class Constants{
     public static String   BotNetUsername = "";
     public static String   BotNetPassword = "";
     public static String   BotNetServer   = "www.valhallalegends.com";
+    public static String   BotNetNotify   = "";
+    public static int   BotNetNotifyCount = 10;
 	
     public static boolean LogStats         = false;
     public static String  StatsUsername    = "";

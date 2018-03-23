@@ -1,6 +1,7 @@
 package Hashing;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 import util.*;
 
 /**
@@ -21,6 +22,9 @@ public class HashMain {
   public static int WAR3KeysHashed=0;
   public static int STARKeysHashed=0;
   public static int D2DVKeysHashed=0;
+  
+  // Tracking variables to detect product updates.
+  public static HashMap<Integer, Integer> badChecks = new HashMap<Integer, Integer>();
 
 
   /** Picks appropriate hashing method based on length, and
@@ -97,6 +101,27 @@ public class HashMain {
     
   public static CheckrevisionResults getRevision(int prod, String formula, String dll, byte platform, int ver){
     String[] files = null;
+    
+    // Check for default formula. If a server sends this it usually means there is an update.
+    //  Since we don't know the identity of the origin server we can only assume things based
+    //  on the number of requests coming in with this formula.
+    if (formula.matches("A=0 B=0 C=0 . *")) {
+    	int badCount = badChecks.get(prod);
+    	badCount++;
+    	
+    	badChecks.put(prod, badCount);
+    	
+    	// server is most likely updating
+    	if (badCount >= Constants.BotNetNotifyCount) {
+    		String updateMessage = "ALERT! Possible update detected for BNLS ID 0x" + PadString.padHex(prod, 2);
+    		if (Controller.botNetClient != null && Constants.BotNetNotify.length() > 0)
+    			Controller.botNetClient.whisper(Constants.BotNetNotify, updateMessage);
+    		Out.info("HashMain", updateMessage);
+    	}
+    } else {
+    	badChecks.put(prod, 0);
+    }
+    
     try{
       CRevChecks[prod-1]++;
       if (Constants.displayParseInfo) Out.info("HashMain", ">>> [" + Constants.prods[prod-1] + "] Version Check V"+ver);

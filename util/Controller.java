@@ -12,8 +12,10 @@ import HTTP.HTTPServer;
  * for the admin, etc. classes to interact.
  */
 public class Controller {
-  public static HTTPServer hServer;
+    public static HTTPServer hServer;
 	public static BNLSServer jServer;
+	public static BotNet botNetClient;
+	
 	public static BNLSConnectionThread lLinkedHead = null;
 	public static ThreadGroup jConnectionThreads=new ThreadGroup("JBLS");
 	public static Statistics stats = null;
