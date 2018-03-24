@@ -1,3 +1,4 @@
+
 /**
  * Project Name:  JBLS ( Java Bot Login Server), or however you want to make the acronym
  *
@@ -46,39 +47,39 @@ import HTTP.HTTPServer;
 
 public class Main {
 
-  /** Main Method - Starting point for program */
-  public static void main(String[] args) throws Exception{
-    cSettings.LoadSettings();
-    cSettings.SaveSettings();
-    
-    Out.setDefaultOutputStream();
-    Out.println("Main", "Java Battle.Net Login Server - (JBLS)  http://www.JBLS.org/");
-    Out.println("Main", "Build: " + Constants.build);
+	/** Main Method - Starting point for program */
+	public static void main(String[] args) throws Exception {
+		cSettings.LoadSettings();
+		cSettings.SaveSettings();
 
-    Out.println("Main", "JBLS Started");
+		Out.setDefaultOutputStream();
+		Out.println("Main", "Java Battle.Net Login Server - (JBLS)  http://www.JBLS.org/");
+		Out.println("Main", "Build: " + Constants.build);
 
-    //Start BNLS Server
-    Out.println("Main","Loading JBLS Server");
-    Controller.jServer=new BNLSServer();
-    Controller.jServer.start();
+		Out.println("Main", "JBLS Started");
 
-    //Start HTTP Server
-    if(Constants.RunHTTP){
-      Out.println("Main","Loading HTTP Server");
-      Controller.hServer=new HTTPServer();
-      Controller.hServer.start();
-    }
-    
-    if(Constants.RunAdmin && Constants.BotNetServer.length() > 0 && 
-    		Constants.BotNetBotID.length() > 0 && Constants.BotNetHubPW.length() > 0 &&
-    		Constants.BotNetUsername.length() > 0 && Constants.BotNetPassword.length() > 0){
-      BotNet bn = new BotNet();
-      bn.start();
-    }   
-	
-	if(Constants.LogStats){
-	  Controller.stats = new Statistics();
-	  Controller.stats.connect();
+		// Start BNLS Server
+		Out.println("Main", "Loading JBLS Server");
+		Controller.jServer = new BNLSServer();
+		Controller.jServer.start();
+
+		// Start HTTP Server
+		if (Constants.RunHTTP) {
+			Out.println("Main", "Loading HTTP Server");
+			Controller.hServer = new HTTPServer();
+			Controller.hServer.start();
+		}
+
+		if (Constants.RunAdmin && Constants.BotNetServer.length() > 0 && Constants.BotNetBotID.length() > 0
+				&& Constants.BotNetHubPW.length() > 0 && Constants.BotNetUsername.length() > 0
+				&& Constants.BotNetPassword.length() > 0) {
+			BotNet bn = new BotNet();
+			bn.start();
+		}
+
+		if (Constants.LogStats) {
+			Controller.stats = new Statistics();
+			Controller.stats.connect();
+		}
 	}
-  }
-}//end main class
+}// end main class
