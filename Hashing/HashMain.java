@@ -86,7 +86,7 @@ public class HashMain {
   
   public static int getVerByte(int prod){
     if(prod <= 0) return 0;
-    if(prod > Constants.prods.length + 1) return 0;
+    if(prod > Constants.prods.length) return 0;
     if (Constants.displayParseInfo) Out.info("JBLS", ">>> [" + Constants.prods[prod-1] + "] Verbyte");
     return Constants.IX86verbytes[prod-1];
   }
