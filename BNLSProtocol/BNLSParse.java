@@ -954,7 +954,7 @@ public class BNLSParse{
     for (int Y = 0; Y < SRP.BIGINT_SIZE; Y++)
       reply.addByte(salt[Y]);
 	for (int Y = 0; Y < SRP.BIGINT_SIZE; Y++)
-	  reply.addDWord(B[Y]);
+	  reply.addByte(B[Y]);
     return reply;
   }
   private OutPacketBuffer onServerLogonProof(InPacketBuffer in){
@@ -992,7 +992,6 @@ public class BNLSParse{
 	byte[] M2 = reservedSRPs[slot].getM2(reservedSRPs[slot].get_A(), reservedSRPs[slot].get_B());
 	OutPacketBuffer reply = new OutPacketBuffer(BNLS_SERVERLOGONPROOF);
 	reply.addDWord(slot);
-	if (equal(M1, M2))
 	reply.addDWord((equal(M1, M2) ? 0x01 : 0x00));
 	for(int Y = 0; Y < 5; Y++)
 	  reply.addDWord(M1[Y]);
