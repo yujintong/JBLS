@@ -1,5 +1,5 @@
 # JBLS
-Java Battle.net Logon Server- Java implementation of ValhallaLegend's BNLS protocol for interacting with Battle.net classic servers.
+Java Battle.net Logon Server- Java implementation of ValhallaLegend's BNLS protocol for interacting with Battle.net classic servers. Originally authored by [Hdx](https://github.com/LexManos/JBLS), this project is now maintained by the community.
 
 ## Disclaimer
 You hereby acknowledge that JBLS is offered as-is and without warranty,
