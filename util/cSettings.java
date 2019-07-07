@@ -49,12 +49,15 @@ public class cSettings {
 
      //Load IX86 Versioning Settings
      for(int x = 0; x < Constants.prods.length; x++){
-     	Constants.IX86files[x][0] = Ini.ReadIni(file, Constants.prods[x] + "-IX86", "HashPath", Constants.IX86files[x][0]);
-     	Constants.IX86files[x][1] = Ini.ReadIni(file, Constants.prods[x] + "-IX86", "Exe", Constants.IX86files[x][1]);
-     	Constants.IX86files[x][2] = Ini.ReadIni(file, Constants.prods[x] + "-IX86", "Storm", Constants.IX86files[x][2]);
-     	Constants.IX86files[x][3] = Ini.ReadIni(file, Constants.prods[x] + "-IX86", "Network", Constants.IX86files[x][3]);
-     	Constants.IX86files[x][4] = Ini.ReadIni(file, Constants.prods[x] + "-IX86", "Screen", Constants.IX86files[x][4]);
-     	Constants.IX86verbytes[x] = Integer.parseInt(Ini.ReadIni(file, Constants.prods[x] + "-IX86", "VerByte", Integer.toHexString(Constants.IX86verbytes[x])), 16);
+    	String header = Constants.prods[x] + "-IX86";
+     	Constants.IX86files[x][0] = Ini.ReadIni(file, header, "HashPath", Constants.IX86files[x][0]);
+     	Constants.IX86files[x][1] = Ini.ReadIni(file, header, "Exe", Constants.IX86files[x][1]);
+     	Constants.IX86files[x][2] = Ini.ReadIni(file, header, "Storm", Constants.IX86files[x][2]);
+     	Constants.IX86files[x][3] = Ini.ReadIni(file, header, "Network", Constants.IX86files[x][3]);
+     	Constants.IX86files[x][4] = Ini.ReadIni(file, header, "Screen", Constants.IX86files[x][4]);
+     	Constants.IX86verbytes[x] = Integer.parseInt(Ini.ReadIni(file, header, "VerByte", Integer.toHexString(Constants.IX86verbytes[x])), 16);
+     	Constants.IX86versions[x] = Ini.ReadIni(file, header, "Version", Constants.IX86versions[x]);
+     	Constants.IX86certs[x] = Ini.ReadIni(file, header, "Cert", Constants.IX86certs[x]);
      }
    }
    public static void SaveSettings(){
@@ -94,13 +97,16 @@ public class cSettings {
 
      //Save IX86 Versioning Settings
      for(int x = 0; x < Constants.prods.length; x++){
-     	Ini.WriteIni(file, Constants.prods[x] + "-IX86", "HashPath", Constants.IX86files[x][0]);
-     	Ini.WriteIni(file, Constants.prods[x] + "-IX86", "Exe", Constants.IX86files[x][1]);
-     	Ini.WriteIni(file, Constants.prods[x] + "-IX86", "Storm", Constants.IX86files[x][2]);
-     	Ini.WriteIni(file, Constants.prods[x] + "-IX86", "Network", Constants.IX86files[x][3]);
-     	Ini.WriteIni(file, Constants.prods[x] + "-IX86", "Screen", Constants.IX86files[x][4]);
-     	Ini.WriteIni(file, Constants.prods[x] + "-IX86", "VerByte", 
+    	String header = Constants.prods[x] + "-IX86";
+     	Ini.WriteIni(file, header, "HashPath", Constants.IX86files[x][0]);
+     	Ini.WriteIni(file, header, "Exe", Constants.IX86files[x][1]);
+     	Ini.WriteIni(file, header, "Storm", Constants.IX86files[x][2]);
+     	Ini.WriteIni(file, header, "Network", Constants.IX86files[x][3]);
+     	Ini.WriteIni(file, header, "Screen", Constants.IX86files[x][4]);
+     	Ini.WriteIni(file, header, "VerByte", 
      	  PadString.padString(Integer.toHexString(Constants.IX86verbytes[x]), 2, '0'));
+     	Ini.WriteIni(file, header, "Version", Constants.IX86versions[x]);
+     	Ini.WriteIni(file,  header, "Cert", Constants.IX86certs[x]);
      }
      
    }

@@ -57,19 +57,17 @@ public class CheckRevisionV4 extends CheckRevisionV1
         }
         crCacheMisses++;
 
-        String version = null;
-        if (prod == Constants.PRODUCT_DIABLO2 || prod == Constants.PRODUCT_LORDOFDESTRUCTION)
-        	version = "1.14.3.71";
-        else {
-            String[] files = getFiles(prod, plat);
-            if (Version[plat][prod] == 0) Version[plat][prod] = getVersion(files, prod);
-            version = getVersionString(Version[plat][prod]);
+        String version = Constants.IX86versions[prod-1];
+        if (version.length() == 0) {
+        	Out.error("CREV", "Simple check revision unavailable for " + Constants.prods[prod-1] + ": missing version number");
+        	return null;
         }
         
-        BigInteger vint = new BigInteger(InetAddress.getByName(version).getAddress());
-        Version[plat][prod] = vint.intValue();
+        Version[plat][prod] = 0;
         
-        Buffer buff = new Buffer(new Buffer(Base64.getDecoder().decode(value)).removeBytes(4));
+        Buffer seed = new Buffer(new Buffer(Base64.getDecoder().decode(value)).removeBytes(4));
+        
+        Buffer buff = new Buffer(seed.getBuffer());
         buff.addString(":" + version + ":");
         buff.addByte((byte)1);
         
@@ -80,9 +78,31 @@ public class CheckRevisionV4 extends CheckRevisionV1
 			Out.error("CREV", "Hashing failed - SHA1 not supported");
 			return null;
 		}
-        String b64 = Base64.getEncoder().encodeToString(hash);
+        String ret = Base64.getEncoder().encodeToString(hash);
         
-        byte[] checkB = b64.substring(0, 4).getBytes();
+        // Add the certificate hash if needed
+        if (mpq.endsWith("D1.mpq")) {
+        	Version[plat][prod] = 6;
+        	
+        	String certHex = Constants.IX86certs[prod-1];
+        	if (certHex.length() == 0) {
+        		Out.error("CREV", "Simple check revision unavailable for " + Constants.prods[prod-1] + ": missing certificate");
+        		return null;
+        	}
+        	buff = new Buffer(hexToBytes(certHex));
+        	buff.addBytes(seed.getBuffer());
+        	
+        	try {
+        		hash = MessageDigest.getInstance("SHA-1").digest(buff.getBuffer());
+        	} catch (NoSuchAlgorithmException e) {
+        		Out.error("CREV", "Hashing failed - SHA1 not supported (step 2)");
+        		return null;
+        	}
+        	
+        	ret += ":" + Base64.getEncoder().encodeToString(hash);
+        }
+        
+        byte[] checkB = ret.substring(0, 4).getBytes();
         
         // Flip the byte order
         for (int i = 0, j = checkB.length - 1; i < j; i++, j--) {
@@ -91,25 +111,22 @@ public class CheckRevisionV4 extends CheckRevisionV1
         	checkB[j] = temp;
         }
         int checksum = new BigInteger(checkB).intValue();
-        if (checksum == 0 || Version[plat][prod] == 0) return null;
+        if (checksum == 0) return null;
         
-        Buffer info = new Buffer(b64.substring(4).getBytes());
+        Buffer info = new Buffer(ret.substring(4).getBytes());
         info.addByte((byte)0);	// Null terminator
 
-        CheckrevisionResults result = new CheckrevisionResults(0, checksum, info);
+        CheckrevisionResults result = new CheckrevisionResults(Version[plat][prod], checksum, info);
         crCache.put(value + mpq + prod + plat, result);
         return result;
     }
     
-    public static String getVersionString(int version)
-    {
-    	try {
-    		byte[] b = BigInteger.valueOf(version).toByteArray();
-			InetAddress val = InetAddress.getByAddress(b);
-			return val.getHostAddress();
-		} catch (UnknownHostException e) {
-			Out.error("CREV", "Unable to parse version string");
-			return null;
-		}
+    public static byte[] hexToBytes(String hex) {
+    	byte[] value = new byte[hex.length() / 2];
+    	for (int i = 0; i < value.length; i++) {
+    		int index = i * 2;
+    		value[i] = (byte)Integer.parseInt(hex.substring(index, index + 2), 16);
+    	}
+    	return value;
     }
 }

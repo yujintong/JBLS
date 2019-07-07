@@ -107,7 +107,7 @@ public class HashMain {
         case 1: files = CheckRevisionV1.getFiles(prod, platform); return CheckRevisionV1.checkRevision(formula, prod, platform, dll);
         case 2: files = CheckRevisionV1.getFiles(prod, platform); return CheckRevisionV2.checkRevision(formula, prod, platform, dll);
         case 3: files = CheckRevisionV3.getFiles(prod, platform); return CheckRevisionV3.checkRevision(formula, prod, platform, dll);
-        case 4: files = CheckRevisionV1.getFiles(prod, platform); return CheckRevisionV4.checkRevision(formula, prod, platform, dll);
+        case 4: files = new String[0]; return CheckRevisionV4.checkRevision(formula, prod, platform, dll);
         default:files = CheckRevisionV1.getFiles(prod, platform); return CheckRevisionV2.checkRevision(formula, prod, platform, dll);
       }
     }catch(FileNotFoundException e){
@@ -157,6 +157,7 @@ public class HashMain {
     if(dll.matches("lockdown-IX86-[0-1][0-9].mpq") == true) return getRevision(prod, formula, dll, Constants.PLATFORM_INTEL, 3);
 
     if(dll.matches("CheckRevision.mpq") == true) return getRevision(prod, formula, dll, Constants.PLATFORM_INTEL, 4);
+    if(dll.matches("CheckRevisionD1.mpq") == true) return getRevision(prod, formula, dll, Constants.PLATFORM_INTEL, 4);
     
     Out.info("CHSUM", "Unknown archive: " + dll + ", Filetime: 0x" + Long.toHexString(filetime));
     return null;
