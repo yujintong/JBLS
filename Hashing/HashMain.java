@@ -100,6 +100,8 @@ public class HashMain {
   
   public static CheckrevisionResults getRevision(int prod, String formula, String dll, byte platform, int ver){
     String[] files = null;
+    if (prod < 0 || prod > Constants.prods.length) return null;
+    	
     try{
       CRevChecks[prod-1]++;
       if (Constants.displayParseInfo) Out.info("HashMain", ">>> [" + Constants.prods[prod-1] + "] Version Check V"+ver);
@@ -159,7 +161,7 @@ public class HashMain {
     if(dll.matches("CheckRevision.mpq") == true) return getRevision(prod, formula, dll, Constants.PLATFORM_INTEL, 4);
     if(dll.matches("CheckRevisionD1.mpq") == true) return getRevision(prod, formula, dll, Constants.PLATFORM_INTEL, 4);
     
-    Out.info("CHSUM", "Unknown archive: " + dll + ", Filetime: 0x" + Long.toHexString(filetime));
+    Out.info("HashMain", "Unknown archive: " + dll + ", Filetime: 0x" + Long.toHexString(filetime));
     return null;
   }
 }
