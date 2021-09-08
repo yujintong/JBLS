@@ -19,17 +19,17 @@ public final class Constants{
     public static final byte PRODUCT_STARCRAFTSHAREWARE= 0x0B;
     public static String[] prods = {"STAR", "SEXP", "W2BN", "D2DV", "D2XP", "JSTR", "WAR3", "W3XP", "DRTL", "DSHR", "SSHR"};
     public static String[][] IX86files = {
-        {"IX86/STAR/", "Starcraft.exe",       "Storm.dll",    "Battle.snp",   "STAR.bin"},
-        {"IX86/STAR/", "Starcraft.exe",       "Storm.dll",    "Battle.snp",   "STAR.bin"},
+        {"IX86/STAR/", "StarCraft.exe",       "Storm.dll",    "NULL",   	  "STAR.bin"},
+        {"IX86/STAR/", "StarCraft.exe",       "Storm.dll",    "NULL",   	  "STAR.bin"},
         {"IX86/W2BN/", "Warcraft II BNE.exe", "Storm.dll",    "Battle.snp",   "W2BN.bin"},
-        {"IX86/D2DV/", "game.exe",            "Bnclient.dll", "D2Client.dll", "D2DV.bin"},
-        {"IX86/D2XP/", "game.exe",            "Bnclient.dll", "D2Client.dll", "D2XP.bin"},
+        {"IX86/D2DV/", "Game.exe",            "NULL", 		  "NULL", 		  "D2DV.bin"},
+        {"IX86/D2XP/", "Game.exe",            "NULL", 		  "NULL", 		  "D2XP.bin"},
         {"IX86/JSTR/", "StarcraftJ.exe",      "Storm.dll",    "Battle.snp",   "JSTR.bin"},
-        {"IX86/WAR3/", "war3.exe",            "Storm.dll",    "Game.dll",     "WAR3.bin"},
-        {"IX86/WAR3/", "war3.exe",            "Storm.dll",    "Game.dll",     "WAR3.bin"},
+        {"IX86/WAR3/", "Warcraft III.exe",    "NULL",    	  "NULL",     	  "WAR3.bin"},
+        {"IX86/WAR3/", "Warcraft III.exe",    "NULL",    	  "NULL",     	  "WAR3.bin"},
         {"IX86/DRTL/", "Diablo.exe",          "Storm.dll",    "Battle.snp",   "DRTL.bin"},
         {"IX86/DSHR/", "Diablo_s.exe",        "Storm.dll",    "Battle.snp",   "DSHR.bin"},
-        {"IX86/SSHR/", "Starcraft_s.exe",     "Storm.dll",    "Battle.snp",   "SSHR.bin"}
+        {"IX86/SSHR/", "Starcraft.exe",       "Storm.dll",    "Battle.snp",   "SSHR.bin"}
     };
     public static int[] IX86verbytes = {0xD3, 0xD3, 0x4f, 0x0e, 0x0e, 0xa9, 0x1E, 0x1E, 0x2a, 0x2a, 0xa5};
     public static String[] IX86versions = {"", "", "2.0.2.1", "1.14.3.71", "1.14.3.71", "", "", "", "2001, 5, 18, 1", "", ""};
