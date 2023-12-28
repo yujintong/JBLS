@@ -17,7 +17,7 @@ public class Statistics{
 	  db = null;
 	}
     db = new Database();
-	if(db.connect("jdbc:mysql://" + Constants.StatsServer + "/" + Constants.StatsDatabase, Constants.StatsUsername, Constants.StatsPassword)){
+	if(db.connect("jdbc:mariadb://" + Constants.StatsServer + "/" + Constants.StatsDatabase, Constants.StatsUsername, Constants.StatsPassword)){
 	  Out.info("Stats", "Connected to SQL server");
     }else{
 	  Out.info("Stats", "Failed to connect to Database " + Constants.StatsDatabase + " on " + Constants.StatsServer + " as " + Constants.StatsUsername);

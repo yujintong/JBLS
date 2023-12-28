@@ -13,7 +13,7 @@ public class Database{
 	  this.username = username;
 	  this.password = password;
 	  this.dbURL = sURL;
-      Class.forName("com.mysql.jdbc.Driver").newInstance();
+      Class.forName("org.mariadb.jdbc.Driver").newInstance();
       conn = DriverManager.getConnection(sURL, username, password);
 	  return true;
 	}catch(Exception e){
