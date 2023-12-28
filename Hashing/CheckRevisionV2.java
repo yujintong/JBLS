@@ -46,7 +46,7 @@ public class CheckRevisionV2 extends CheckRevisionV1
     public static void main(String[] args){    }
     public static CheckrevisionResults checkRevision(String versionString, int prod, byte plat, String mpq) throws FileNotFoundException, IOException
     {
-        if(prod > 0x0B || plat > 3 || prod < 0 || plat < 0) return null;
+        if(prod > Constants.prods.length || plat > 3 || prod <= 0 || plat <= 0) return null;
         
         CheckrevisionResults cacheHit = (CheckrevisionResults)crCache.get(versionString + mpq + prod + plat);
         if(cacheHit != null){

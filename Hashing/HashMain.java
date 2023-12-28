@@ -88,8 +88,7 @@ public class HashMain {
   }
   
   public static int getVerByte(int prod){
-    if(prod <= 0) return 0;
-    if(prod > Constants.prods.length) return 0;
+    if (prod <= 0 || prod > Constants.prods.length) return 0;
     if (Constants.displayParseInfo) Out.info("JBLS", ">>> [" + Constants.prods[prod-1] + "] Verbyte");
     return Constants.IX86verbytes[prod-1];
   }
@@ -100,8 +99,11 @@ public class HashMain {
   
   public static CheckrevisionResults getRevision(int prod, String formula, String dll, byte platform, int ver){
     String[] files = null;
-    if (prod < 0 || prod > Constants.prods.length) return null;
-    	
+    if (prod <= 0 || prod > Constants.prods.length) return null;
+
+    // No part of this system actually supports non-Intel platforms so just stop pretending.
+    if (platform != Constants.PLATFORM_INTEL) return null; 
+
     try{
       CRevChecks[prod-1]++;
       if (Constants.displayParseInfo) Out.info("HashMain", ">>> [" + Constants.prods[prod-1] + "] Version Check V"+ver);
